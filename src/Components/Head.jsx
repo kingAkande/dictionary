@@ -11,10 +11,10 @@ const Head = () => {
         <img className="h-[36px]" src={book} alt="book logo" />
       </div>
       <div className=" flex gap-3">
-        <select name="" id="">
-          <option value="">Sans Serif</option>
+        <select className="font-bold" name="" id="">
+          <option className="" value="">Sans Serif</option>
           <option value="">Serif</option>
-          <option value="">Mono</option>
+          <option className="" value="">Mono</option>
         </select>
         <span>|</span>
         <div className="flex gap-3 items-center">
