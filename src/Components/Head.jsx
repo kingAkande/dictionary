@@ -17,15 +17,15 @@ const Head = () => {
           <option className="" value="">Mono</option>
         </select> */}
         <div class="relative ">
-          <select class="appearance-none  pr-8 w-full focus:outline-none focus:ring-2 focus:ring-blue-500">
+          <select class="appearance-none  pr-6 w-full focus:outline-none focus:ring-2 focus:ring-blue-500">
             <option>Sans Serif</option>
             <option>Serif</option>
             <option>Mono</option>
           </select>
           {/* <!-- Custom arrow using CSS --> */}
-          <div class="absolute inset-y-0 right-0 flex items-center px-2 pointer-events-none">
+          <div class="absolute inset-y-0 right-0 flex items-center  pointer-events-none">
             <svg
-              class="w-4 h-4 text-[#A445ED]"
+              class="w-4 h-4 mb-2 text-[#A445ED]"
               fill="none"
               stroke="#A445ED"
               viewBox="0 0 24 24"

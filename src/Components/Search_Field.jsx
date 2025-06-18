@@ -1,9 +1,8 @@
 import React, { useState } from 'react'
 import search_button from '../assets/searchButtton.png'
 
-const Search_Field = () => {
+const Search_Field = ({word , setWord}) => {
 
-   const [word , setWord]=useState("Keyboard")
 
     function handlesubmit(e){
         e.preventDefault();
