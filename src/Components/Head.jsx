@@ -1,6 +1,8 @@
 import React from "react";
 import book from "../assets/Shape.png";
 import moon from "../assets/iconoir_half-moon.png";
+import Switch from "./Switch";
+
 
 const Head = () => {
   return (
@@ -16,9 +18,8 @@ const Head = () => {
         </select>
         <span>|</span>
         <div className="flex gap-3 items-center">
-          <div className="w-8 h-4 pl-0.5 border rounded-2xl flex items-center ">
-            <button className="w-3 h-3 border rounded-full "></button>
-          </div>
+          <Switch containercolor="bg-[#A445ED]" />
+
           <img src={moon} alt="moon logo" />
         </div>
       </div>

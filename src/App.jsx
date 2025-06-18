@@ -5,8 +5,7 @@ import Switch from "./Components/Switch";
 function App() {
   return (
     <>
-      {/* <Head/> */}
-      <Switch/>
+      <Head/>
     </>
   );
 }

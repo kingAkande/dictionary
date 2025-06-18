@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 // import moon from "../assets/iconoir_half-moon.png";
 
-const Switch = () => {
+const Switch = ({containercolor}) => {
 
   const [checked, setChecked] = useState(false);
 
@@ -10,9 +10,9 @@ const Switch = () => {
     }
    
   return (
-    <div className= 'p-6'>
+    <div className= ''>
 
-      <div onClick={handlecheck} className= "bg-[#A445ED] w-8 h-4 pl-0.5 rounded-2xl flex items-center" >
+      <div onClick={handlecheck} className= {`w-8 h-4 px-0.5 rounded-2xl flex items-center ${containercolor} `} >
         <button className = {`w-3 h-3 rounded-full bg-[#FFFFFF] ${checked ? 'translate-x-full' : 'translate-x-0'}`}></button>
       </div>
     </div>
