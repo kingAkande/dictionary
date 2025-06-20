@@ -3,7 +3,7 @@ import playbutton from "../assets/PlayButton.png"
 
 const Result_v1 = ({word}) => {
   return (
-    <div className="w-[722px] h-[144px] flex items-center justify-between mb-6">
+    <div className="w-[737px] h-[144px] flex items-center justify-between mb-6">
         <div>
 
       <h1 className="font-bold font-serif text-7xl w-[293px] h-[77px]  ">{word}</h1>
