@@ -4,7 +4,7 @@ import Result_v2 from "./Result_v2";
 
 const Word_Result = ({word}) => {
   return (
-    <div className="w-[737px] h-[829px] border  mt-8">
+    <div className="w-[737px] border  mt-8">
         <Result_v1 word ={word}/>
         <Result_v2/>
 
