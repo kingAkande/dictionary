@@ -6,7 +6,7 @@ import Word_Result from "./Components/Word_Result";
 
 function App() {
   const [word, setWord] = useState("");
-  const [definitions ,setDefinition]=useState({});
+  const [apiResponse ,setapiResponse]=useState({});
 
   useEffect(
     function () {
@@ -30,6 +30,7 @@ function App() {
           }
           const data = await res.json();
           console.log(data);
+          setapiResponse(data)
         } catch (err) {
           if (err.name !== "AbortError") {
             console.error(err);
@@ -43,15 +44,19 @@ function App() {
     [word]
   );
 
-  
+console.log(apiResponse)
+
+const {meanings , phonetics , sourceUrls , word:WordApi} = apiResponse[0]
+
+
   
   return (
     
     <>
       <div className="p-4 ">
         <Head />
-        <Search_Field word={word} setWord={setWord} />
-        <Word_Result word={word} />
+        <Search_Field searchWord={word} setWord={setWord} />
+        <Word_Result wordApi={WordApi} />
       </div>
     </>
   );
