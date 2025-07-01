@@ -6,7 +6,7 @@ import Word_Result from "./Components/Word_Result";
 
 function App() {
   const [word, setWord] = useState("");
-  const [apiResponse ,setapiResponse]=useState({});
+  const [apiResponse ,setapiResponse]=useState([]);
 
   useEffect(
     function () {
@@ -46,9 +46,16 @@ function App() {
 
 console.log(apiResponse)
 
-const {meanings , phonetics , sourceUrls , word:WordApi} = apiResponse[0]
+ const {meanings , phonetics , sourceUrls } = apiResponse[0] || {}
+ 
+// const wordwithAUdio = phonetics.find(x => x.audio)
+// const {text , audio} = wordwithAUdio;
+// console.log(audio , text)
 
-
+// const wordMeaning = meanings
+// const nounpart = wordMeaning.find(x => x.partOfSpeech === "noun");
+// const {definitions} = nounpart
+// console.log(definitions)
   
   return (
     
@@ -56,7 +63,7 @@ const {meanings , phonetics , sourceUrls , word:WordApi} = apiResponse[0]
       <div className="p-4 ">
         <Head />
         <Search_Field searchWord={word} setWord={setWord} />
-        <Word_Result wordApi={WordApi} />
+        <Word_Result wordApi />
       </div>
     </>
   );

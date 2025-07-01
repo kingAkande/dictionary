@@ -1,12 +1,12 @@
 import React from "react";
 import playbutton from "../assets/PlayButton.png"
 
-const Result_v1 = ({word}) => {
+const Result_v1 = ({wordApi}) => {
   return (
     <div className="w-[737px] h-[144px] flex items-center justify-between mb-6">
         <div>
 
-      <h1 className="font-bold font-serif text-7xl w-[293px] h-[77px]  ">{word}</h1>
+      <h1 className="font-bold font-serif text-7xl w-[293px] h-[77px]  ">{wordApi}</h1>
       <p className="mt-2 font-sans text-3xl text-[#A445ED]">/ˈkiːbɔːd/</p>
         </div>
       <div className="w-[73.47px] h-[75px] rounded-full bg-[#ead7f8] relative ">
