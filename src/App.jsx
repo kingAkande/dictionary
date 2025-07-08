@@ -6,12 +6,11 @@ import Word_Result from "./Components/Word_Result";
 
 function App() {
   const [word, setWord] = useState("");
-  const [apiResponse ,setapiResponse]=useState([]);
+  const [apiResponse ,setapiResponse]=useState(null);
 
-  useEffect(
+  useEffect( 
     function () {
       if (!word) return;
-
       const controller = new AbortController();
       async function getDefinitions() {
         try {
@@ -20,6 +19,7 @@ function App() {
             { signal: controller.signal }
           );
 
+          
           if (!res.ok) {
             // Handle 404 or other HTTP errors
             if (res.status === 404) {
@@ -28,6 +28,7 @@ function App() {
             }
             throw new Error(`HTTP error! status: ${res.status}`);
           }
+
           const data = await res.json();
           console.log(data);
           setapiResponse(data)
@@ -39,31 +40,54 @@ function App() {
       }
 
       getDefinitions();
-      return () => controller.abort();
+      return () => {controller.abort()
+        // console.log('Aborting previous fetch');
+
+      };
     },
     [word]
   );
 
-console.log(apiResponse)
+// console.log(apiResponse)
 
- const {meanings , phonetics , sourceUrls } = apiResponse[0] || {}
- 
-// const wordwithAUdio = phonetics.find(x => x.audio)
-// const {text , audio} = wordwithAUdio;
-// console.log(audio , text)
+
+// if (apiResponse.length > 0) {
+//   const [firstEntry] = apiResponse;
+//   const { word:wordAPI, phonetic, phonetics, meanings, sourceUrls, license } = firstEntry;
+  
+// //   console.log("Word:", wordAPI);
+// // console.log("Phonetic:", phonetic);
+// }
+ const firstEntry = apiResponse?.[0] || {};
+  const { 
+    word: apiWord = '', 
+    phonetic = '', 
+    phonetics = [], 
+    meanings = [], 
+    sourceUrls = [], 
+    license = '' 
+  } = firstEntry;
+
+
+
+console.log("this is me:" ,phonetic);
+
 
 // const wordMeaning = meanings
 // const nounpart = wordMeaning.find(x => x.partOfSpeech === "noun");
-// const {definitions} = nounpart
+// const {partOfSpeech , definitions} = nounpart
 // console.log(definitions)
+return (
   
-  return (
-    
-    <>
+  <>
       <div className="p-4 ">
-        <Head />
-        <Search_Field searchWord={word} setWord={setWord} />
-        <Word_Result wordApi />
+
+        <Head/>
+
+        <Search_Field searchWord={word} setword={setWord} />
+
+        <Word_Result wordApi={apiWord} phoneticText={phonetic} />
+
       </div>
     </>
   );
