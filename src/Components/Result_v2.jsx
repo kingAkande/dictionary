@@ -4,7 +4,7 @@ import rectangle3 from "../assets/Rectangle3.png";
 import searchlogo from "../assets/search_logo.png";
 // import rectangleimage2 from "../assets/Rectangle2.png";
 
-const Result_v2 = () => {
+const Result_v2 = ({ nounMeaning, verbMeaning, synonymsApi }) => {
   return (
     <>
       <div className="w-[736px]  ">
@@ -34,8 +34,20 @@ const Result_v2 = () => {
         </ul>
       </div> */}
 
+        {/* {definitions.map((x)=> <ul>{x.definition}</ul> ).slice(0,3)} */}
+
         <Parts_of_speech Parts_of_speech="Noun">
-          <ul className="mt-8 ml-4 space-y-4">
+          {nounMeaning
+            .map((x, i) => (
+              <ul className="mt-8 ml-4 space-y-4" key={i}>
+                <li className="list-none before:content-['•'] before:text-[#8F19E8] before:mr-3 ">
+                  {x?.definition}
+                </li>
+              </ul>
+            ))
+            .slice(0, 3)}
+
+          {/* <ul className="mt-8 ml-4 space-y-4">
             <li className="list-none before:content-['•'] before:text-[#8F19E8] before:mr-3 ">
               Lorem ipsum dolor sit amet consectetur adipisicing elit. Assumenda
               tempora perspiciatis illum autem consequatur laudantium unde
@@ -48,8 +60,7 @@ const Result_v2 = () => {
               Accusantium perspiciatis itaque maiores modi commodi ut fuga
               nesciunt obcaecati? Rerum.
             </li>
-      
-          </ul>
+          </ul> */}
         </Parts_of_speech>
 
         <div className="flex gap-12 mt-14 ">
@@ -57,20 +68,32 @@ const Result_v2 = () => {
             Synonyms
           </h1>
           <p className=" text-2xl text-[#A445ED] font-bold font-[lora]">
-            electronic keyboard
+            {synonymsApi
+              .map((x) => x)
+              .slice(0, 6)
+              .toString("")}
           </p>
         </div>
       </div>
+      {/* {verbDefinitions.map((x)=> <ul>{x?.definition}</ul>)} */}
       <Parts_of_speech Parts_of_speech="Verb" styl="mt-12">
-        <ul className="mt-6 ml-4 space-y-4">
+        {verbMeaning.map((x) => (
+          <ul className="mt-6 ml-4 space-y-4">
+            <li className="list-none before:content-['•'] before:text-[#8F19E8] before:mr-3 ">
+              {x?.definition}
+            </li>
+            <p className="ml-5" >  {x?.example ? `"${x?.example}"` : "" }</p>
+          </ul>
+        )).slice(0, 3)}
+
+        {/* <ul className="mt-6 ml-4 space-y-4">
           <li className="list-none before:content-['•'] before:text-[#8F19E8] before:mr-3 ">
             Lorem ipsum dolor sit amet consectetur adipisicing elit. Assumenda
             tempora perspiciatis illum autem consequatur laudantium unde ducimus
             minus debitis, placeat quod quibusdam nobis iste quia doloremque,
             amet vitae. Accusantium, facilis?
           </li>
-        
-        </ul>
+        </ul> */}
       </Parts_of_speech>
       <img src={rectangle3} alt="rectangle3" className="mt-8" />
       <div className="flex gap-12 mt-4 font-serif ">
