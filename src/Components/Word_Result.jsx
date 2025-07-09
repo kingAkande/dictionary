@@ -9,6 +9,7 @@ const Word_Result = ({
   verbMeaning,
   synonymsApi,
   sourceLink,
+  sourceLinkHandler
 }) => {
   return (
     <div className="w-[737px] border  mt-8">
@@ -18,6 +19,7 @@ const Word_Result = ({
         verbMeaning={verbMeaning}
         synonymsApi={synonymsApi}
         sourceLink={sourceLink}
+        sourceLinkHandler={sourceLinkHandler}
       />
     </div>
   );

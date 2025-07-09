@@ -1,12 +1,30 @@
 import { useEffect, useState } from "react";
+// import {useNavigate , useLocation} from 'react-router-dom'
+import { useNavigate, useLocation, Routes, Route } from 'react-router-dom';
 import Head from "./Components/Head";
 import Switch from "./Components/Switch";
 import Search_Field from "./Components/Search_Field";
 import Word_Result from "./Components/Word_Result";
 
 function App() {
-  const [word, setWord] = useState("");
-  const [apiResponse, setapiResponse] = useState(null);
+  
+  const navigate = useNavigate();
+  const location = useLocation();
+
+   const [word, setWord] = useState(location.state?.word || "");
+   const [apiResponse, setapiResponse] = useState(location.state?.apiResponse || null);
+
+     const handleSourceClick = (url) => {
+    navigate('/source', { 
+      state: { 
+        word, 
+        apiResponse,
+        sourceUrl: url 
+      }
+    });
+  };
+  // const [word, setWord] = useState("");
+  // const [apiResponse, setapiResponse] = useState(null);
 
   useEffect(
     function () {
@@ -108,6 +126,7 @@ function App() {
           phoneticText={phonetic}
           verbMeaning = {verbDefinitions}
           sourceLink = {sourceLink}
+          sourceLinkHandler ={handleSourceClick}
         />
 
         {/* {defs.map((x,i)=> <ul key ={i}>{x}</ul>)} */}
