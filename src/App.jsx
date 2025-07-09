@@ -66,6 +66,9 @@ function App() {
     license = "",
   } = firstEntry;
 
+
+    const sourceLink = sourceUrls;
+    console.log(sourceLink)
   // const wordMeaning = meanings
   // const nounpart = wordMeaning.find(x => x.partOfSpeech === "noun");
   // const {partOfSpeech , definitions} = nounpart
@@ -85,10 +88,10 @@ function App() {
 
   const verbmeaning = wordMeaning.find(x => x.partOfSpeech === "verb")||{};
   const { definitions:verbDefinitions = []} = verbmeaning;
-  console.log("verbosssss", verbDefinitions )
+  // console.log("verbosssss", verbDefinitions )
 
-  const vm1 = verbDefinitions[0]
-  console.log( "this is vm1",vm1?.definition)
+  // const vm1 = verbDefinitions[0]
+  // console.log( "this is vm1",vm1?.definition)
 
 
   return (
@@ -104,13 +107,16 @@ function App() {
           wordApi={apiWord}
           phoneticText={phonetic}
           verbMeaning = {verbDefinitions}
+          sourceLink = {sourceLink}
         />
 
         {/* {defs.map((x,i)=> <ul key ={i}>{x}</ul>)} */}
 
         {definitions.map((x) => <ul>{x?.definition}</ul>).slice(0, 3)}
 
-        {verbDefinitions.map((x)=> <ul>{x?.definition}</ul>)}
+        {verbDefinitions.map((x)=> <ul>{x?.definition}</ul>).slice(0,3)}
+
+        {sourceLink}
 
         {/* {syn} */}
 

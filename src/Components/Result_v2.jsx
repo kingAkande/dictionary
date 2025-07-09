@@ -4,7 +4,7 @@ import rectangle3 from "../assets/Rectangle3.png";
 import searchlogo from "../assets/search_logo.png";
 // import rectangleimage2 from "../assets/Rectangle2.png";
 
-const Result_v2 = ({ nounMeaning, verbMeaning, synonymsApi }) => {
+const Result_v2 = ({ nounMeaning, verbMeaning, synonymsApi,sourceLink }) => {
   return (
     <>
       <div className="w-[736px]  ">
@@ -98,11 +98,14 @@ const Result_v2 = ({ nounMeaning, verbMeaning, synonymsApi }) => {
       <img src={rectangle3} alt="rectangle3" className="mt-8" />
       <div className="flex gap-12 mt-4 font-serif ">
         <h1 className="  text-[#757575] w-[48px] h-[18px] ">Source</h1>
-        <div className="flex items-center gap-4 ">
+        <div >
+          <a href={`${sourceLink}`} className="flex items-center gap-4 ">
           <p className=" underline  text-[#A445ED] ">
-            https://en.wiktionary.org/wiki/keyboard
+            {sourceLink}
           </p>
           <img src={searchlogo} alt="searchlogo" />
+
+          </a>
         </div>
       </div>
     </>
