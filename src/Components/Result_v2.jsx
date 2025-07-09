@@ -4,7 +4,13 @@ import rectangle3 from "../assets/Rectangle3.png";
 import searchlogo from "../assets/search_logo.png";
 // import rectangleimage2 from "../assets/Rectangle2.png";
 
-const Result_v2 = ({ nounMeaning, verbMeaning, synonymsApi,sourceLink,sourceLinkHandler }) => {
+const Result_v2 = ({
+  nounMeaning,
+  verbMeaning,
+  synonymsApi,
+  sourceLink,
+  sourceLinkHandler,
+}) => {
   return (
     <>
       <div className="w-[736px]  ">
@@ -77,14 +83,16 @@ const Result_v2 = ({ nounMeaning, verbMeaning, synonymsApi,sourceLink,sourceLink
       </div>
       {/* {verbDefinitions.map((x)=> <ul>{x?.definition}</ul>)} */}
       <Parts_of_speech Parts_of_speech="Verb" styl="mt-12">
-        {verbMeaning.map((x) => (
-          <ul className="mt-6 ml-4 space-y-4">
-            <li className="list-none before:content-['•'] before:text-[#8F19E8] before:mr-3 ">
-              {x?.definition}
-            </li>
-            <p className="ml-5" >  {x?.example ? `"${x?.example}"` : "" }</p>
-          </ul>
-        )).slice(0, 3)}
+        {verbMeaning
+          .map((x) => (
+            <ul className="mt-6 ml-4 space-y-4">
+              <li className="list-none before:content-['•'] before:text-[#8F19E8] before:mr-3 ">
+                {x?.definition}
+              </li>
+              <p className="ml-5"> {x?.example ? `"${x?.example}"` : ""}</p>
+            </ul>
+          ))
+          .slice(0, 3)}
 
         {/* <ul className="mt-6 ml-4 space-y-4">
           <li className="list-none before:content-['•'] before:text-[#8F19E8] before:mr-3 ">
@@ -98,23 +106,30 @@ const Result_v2 = ({ nounMeaning, verbMeaning, synonymsApi,sourceLink,sourceLink
       <img src={rectangle3} alt="rectangle3" className="mt-8" />
       <div className="flex gap-12 mt-4 font-serif ">
         <h1 className="  text-[#757575] w-[48px] h-[18px] ">Source</h1>
-        <div >
-          {/* <a href={`${sourceLink}`} className="flex items-center gap-4 ">
-          <p className=" underline  text-[#A445ED] ">
-            {sourceLink}
-          </p>
-          <img src={searchlogo} alt="searchlogo" />
+        <div>
+          <a
+            href={`${sourceLink}`}
+            className="flex items-center gap-4 "
+            onClick={() => sourceLinkHandler(sourceLink)}
+          >
+            <p className=" underline  text-[#A445ED] ">
+              {sourceLink.slice(0, 1)}
+            </p>
+            <img src={searchlogo} alt="searchlogo" />
+          </a>
 
-          </a> */}
-          {sourceLink && sourceLink.map((url, i)=> (
-            <a href={`${sourceLink}`} key={i} className="flex items-center gap-4 " onClick={()=>sourceLinkHandler(url) }>
-          <p className=" underline  text-[#A445ED] ">
-            {sourceLink}
-          </p>
-          <img src={searchlogo} alt="searchlogo" />
-
-          </a> 
-          ))}
+          {/* {sourceLink &&
+            sourceLink.map((url, i) => (
+              <a
+                href={`${sourceLink}`}
+                key={i}
+                className="flex items-center gap-4 "
+                onClick={() => sourceLinkHandler(url)}
+              >
+                <p className=" underline  text-[#A445ED] ">{sourceLink.slice(0,1)}</p>
+                <img src={searchlogo} alt="searchlogo" />
+              </a>
+            ))} */}
         </div>
       </div>
     </>

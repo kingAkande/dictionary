@@ -1,26 +1,27 @@
 import { useEffect, useState } from "react";
 // import {useNavigate , useLocation} from 'react-router-dom'
-import { useNavigate, useLocation, Routes, Route } from 'react-router-dom';
+import { useNavigate, useLocation, Routes, Route } from "react-router-dom";
 import Head from "./Components/Head";
 import Switch from "./Components/Switch";
 import Search_Field from "./Components/Search_Field";
 import Word_Result from "./Components/Word_Result";
 
 function App() {
-  
   const navigate = useNavigate();
   const location = useLocation();
 
-   const [word, setWord] = useState(location.state?.word || "");
-   const [apiResponse, setapiResponse] = useState(location.state?.apiResponse || null);
+  const [word, setWord] = useState(location.state?.word || "");
+  const [apiResponse, setapiResponse] = useState(
+    location.state?.apiResponse || null
+  );
 
-     const handleSourceClick = (url) => {
-    navigate('/source', { 
-      state: { 
-        word, 
+  const handleSourceClick = (url) => {
+    navigate("/source", {
+      state: {
+        word,
         apiResponse,
-        sourceUrl: url 
-      }
+        sourceUrl: url,
+      },
     });
   };
   // const [word, setWord] = useState("");
@@ -84,9 +85,8 @@ function App() {
     license = "",
   } = firstEntry;
 
-
-    const sourceLink = sourceUrls;
-    console.log(sourceLink)
+  // const sourceLink = sourceUrls;
+  // console.log(sourceLink);
   // const wordMeaning = meanings
   // const nounpart = wordMeaning.find(x => x.partOfSpeech === "noun");
   // const {partOfSpeech , definitions} = nounpart
@@ -102,15 +102,12 @@ function App() {
 
   const defs = [def1?.definition, def2?.definition, def3?.definition];
 
- 
-
-  const verbmeaning = wordMeaning.find(x => x.partOfSpeech === "verb")||{};
-  const { definitions:verbDefinitions = []} = verbmeaning;
+  const verbmeaning = wordMeaning.find((x) => x.partOfSpeech === "verb") || {};
+  const { definitions: verbDefinitions = [] } = verbmeaning;
   // console.log("verbosssss", verbDefinitions )
 
   // const vm1 = verbDefinitions[0]
   // console.log( "this is vm1",vm1?.definition)
-
 
   return (
     <>
@@ -124,18 +121,18 @@ function App() {
           nounMeaning={definitions}
           wordApi={apiWord}
           phoneticText={phonetic}
-          verbMeaning = {verbDefinitions}
-          sourceLink = {sourceLink}
-          sourceLinkHandler ={handleSourceClick}
+          verbMeaning={verbDefinitions}
+          sourceLink={sourceUrls}
+          sourceLinkHandler={handleSourceClick}
         />
 
         {/* {defs.map((x,i)=> <ul key ={i}>{x}</ul>)} */}
 
         {definitions.map((x) => <ul>{x?.definition}</ul>).slice(0, 3)}
 
-        {verbDefinitions.map((x)=> <ul>{x?.definition}</ul>).slice(0,3)}
+        {verbDefinitions.map((x) => <ul>{x?.definition}</ul>).slice(0, 3)}
 
-        {sourceLink}
+        {sourceUrls}
 
         {/* {syn} */}
 
