@@ -1,5 +1,4 @@
 import { useEffect, useState } from "react";
-// import {useNavigate , useLocation} from 'react-router-dom'
 import { useNavigate, useLocation, Routes, Route } from "react-router-dom";
 import Head from "./Components/Head";
 import Switch from "./Components/Switch";
@@ -82,7 +81,6 @@ function App() {
     phonetics = [],
     meanings = [],
     sourceUrls = [],
-    license = "",
   } = firstEntry;
 
   // const sourceLink = sourceUrls;
@@ -94,13 +92,10 @@ function App() {
 
   const wordMeaning = meanings;
   const nounpart = wordMeaning.find((x) => x.partOfSpeech === "noun") || {};
-  const { partOfSpeech = "", definitions = [], synonyms = [] } = nounpart;
+  const { definitions = [], synonyms = [] } = nounpart;
 
-  const def1 = definitions[0];
-  const def2 = definitions[1];
-  const def3 = definitions[2];
 
-  const defs = [def1?.definition, def2?.definition, def3?.definition];
+
 
   const verbmeaning = wordMeaning.find((x) => x.partOfSpeech === "verb") || {};
   const { definitions: verbDefinitions = [] } = verbmeaning;
@@ -124,15 +119,20 @@ function App() {
           verbMeaning={verbDefinitions}
           sourceLink={sourceUrls}
           sourceLinkHandler={handleSourceClick}
+          audioLink = {phonetics}
         />
+
+        {phonetics.filter((x)=> x?.audio&&x?.text )?.audio}
+
+        {/* {phonetics.map((x)=> x?.audio && x?.text ? x?.audio : null )} */}
 
         {/* {defs.map((x,i)=> <ul key ={i}>{x}</ul>)} */}
 
-        {definitions.map((x) => <ul>{x?.definition}</ul>).slice(0, 3)}
+        {/* {definitions.map((x) => <ul>{x?.definition}</ul>).slice(0, 3)}
 
-        {verbDefinitions.map((x) => <ul>{x?.definition}</ul>).slice(0, 3)}
+        {verbDefinitions.map((x) => <ul>{x?.definition}</ul>).slice(0, 3)} */}
 
-        {sourceUrls}
+        {/* {sourceUrls} */}
 
         {/* {syn} */}
 

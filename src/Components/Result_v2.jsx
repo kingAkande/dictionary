@@ -84,8 +84,8 @@ const Result_v2 = ({
       {/* {verbDefinitions.map((x)=> <ul>{x?.definition}</ul>)} */}
       <Parts_of_speech Parts_of_speech="Verb" styl="mt-12">
         {verbMeaning
-          .map((x) => (
-            <ul className="mt-6 ml-4 space-y-4">
+          .map((x,i) => (
+            <ul key={i} className="mt-6 ml-4 space-y-4">
               <li className="list-none before:content-['•'] before:text-[#8F19E8] before:mr-3 ">
                 {x?.definition}
               </li>
