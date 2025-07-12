@@ -12,11 +12,15 @@ const Result_v1 = ({wordApi , phoneticText , audioLink}) => {
 
   function play() {
   const firstAudioWithText = audioLink.find(x => x?.audio && x?.text);
-  
+  const onlyAudio = audioLink.find((x)=>x.audio);
+
   if (firstAudioWithText) {
     const audio = new Audio(firstAudioWithText.audio);
     audio.play().catch(console.error);
-  } else alert("doesn't have a sound") 
+  } else if(onlyAudio) {
+       const audio2 = new Audio(onlyAudio.audio);
+    audio2.play().catch(console.error);
+  }else alert("doesn't have a sound") 
 }
 
 

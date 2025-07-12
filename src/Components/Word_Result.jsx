@@ -10,11 +10,13 @@ const Word_Result = ({
   synonymsApi,
   sourceLink,
   sourceLinkHandler,
-  audioLink
+  audioLink,
+   loading,
+   loadcomponent
 }) => {
   return (
     <div className="w-[737px] border  mt-8">
-      <Result_v1 audioLink={audioLink} wordApi={wordApi} phoneticText={phoneticText} />
+     {loading ? loadcomponent : <Result_v1 audioLink={audioLink} wordApi={wordApi} phoneticText={phoneticText} />}
       <Result_v2
         nounMeaning={nounMeaning}
         verbMeaning={verbMeaning}

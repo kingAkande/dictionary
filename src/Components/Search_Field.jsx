@@ -20,6 +20,7 @@ const Search_Field = ({word, setword}) => {
         </form>
     </div>
   )
+  
 }
 
 export default Search_Field

@@ -13,6 +13,7 @@ function App() {
   const [apiResponse, setapiResponse] = useState(
     location.state?.apiResponse || null
   );
+  const [isLoading , setisLoading] = useState(false);
 
   const handleSourceClick = (url) => {
     navigate("/source", {
@@ -23,14 +24,14 @@ function App() {
       },
     });
   };
-  // const [word, setWord] = useState("");
-  // const [apiResponse, setapiResponse] = useState(null);
+
 
   useEffect(
     function () {
       if (!word) return;
       const controller = new AbortController();
       async function getDefinitions() {
+        setisLoading(true)
         try {
           const res = await fetch(
             `https://api.dictionaryapi.dev/api/v2/entries/en/${word}`,
@@ -49,31 +50,23 @@ function App() {
           const data = await res.json();
           console.log(data);
           setapiResponse(data);
+          setisLoading(false)
+        
         } catch (err) {
           if (err.name !== "AbortError") {
             console.error(err);
           }
-        }
+        } 
       }
 
       getDefinitions();
       return () => {
         controller.abort();
-        // console.log('Aborting previous fetch');
       };
     },
     [word]
   );
 
-  // console.log(apiResponse)
-
-  // if (apiResponse.length > 0) {
-  //   const [firstEntry] = apiResponse;
-  //   const { word:wordAPI, phonetic, phonetics, meanings, sourceUrls, license } = firstEntry;
-
-  // //   console.log("Word:", wordAPI);
-  // // console.log("Phonetic:", phonetic);
-  // }
   const firstEntry = apiResponse?.[0] || {};
   const {
     word: apiWord = "",
@@ -83,26 +76,16 @@ function App() {
     sourceUrls = [],
   } = firstEntry;
 
-  // const sourceLink = sourceUrls;
-  // console.log(sourceLink);
-  // const wordMeaning = meanings
-  // const nounpart = wordMeaning.find(x => x.partOfSpeech === "noun");
-  // const {partOfSpeech , definitions} = nounpart
-  // console.log(definitions)
+
 
   const wordMeaning = meanings;
   const nounpart = wordMeaning.find((x) => x.partOfSpeech === "noun") || {};
   const { definitions = [], synonyms = [] } = nounpart;
 
 
-
-
   const verbmeaning = wordMeaning.find((x) => x.partOfSpeech === "verb") || {};
   const { definitions: verbDefinitions = [] } = verbmeaning;
-  // console.log("verbosssss", verbDefinitions )
 
-  // const vm1 = verbDefinitions[0]
-  // console.log( "this is vm1",vm1?.definition)
 
   return (
     <>
@@ -112,6 +95,8 @@ function App() {
         <Search_Field searchWord={word} setword={setWord} />
 
         <Word_Result
+          loading= {isLoading}
+          loadcomponent={<Loading/>}
           synonymsApi={synonyms}
           nounMeaning={definitions}
           wordApi={apiWord}
@@ -122,27 +107,17 @@ function App() {
           audioLink = {phonetics}
         />
 
-        {phonetics.filter((x)=> x?.audio&&x?.text )?.audio}
-
-        {/* {phonetics.map((x)=> x?.audio && x?.text ? x?.audio : null )} */}
-
-        {/* {defs.map((x,i)=> <ul key ={i}>{x}</ul>)} */}
-
-        {/* {definitions.map((x) => <ul>{x?.definition}</ul>).slice(0, 3)}
-
-        {verbDefinitions.map((x) => <ul>{x?.definition}</ul>).slice(0, 3)} */}
-
-        {/* {sourceUrls} */}
-
-        {/* {syn} */}
-
-        {/* {def1?.definition}
-        {def2?.definition}
-        {def3?.definition} */}
-        {/* {definitions.map((x, i)=> <ul key={i}>{x}</ul>)} */}
       </div>
     </>
   );
 }
 
 export default App;
+
+function Loading(){
+  return(
+    <div  className=" h-[100px] flex items-center">
+      <h1 className="text-3xl bold "> Loading...</h1>
+     </div>
+  )
+}
