@@ -11,7 +11,7 @@ const Head = ({ onChooseFont,  onfonts , onsetFont}) => {
   // const availableFonts = [{name:"" , Link: ""}]
 
   
-  // const [fontSans , setFontSans] = useState("font-sans")
+  const [fontSans , setFontSans] = useState("font-sans")
   
   const [fontSerif , setFontSerif] = useState("font-serif")
   
@@ -40,7 +40,7 @@ const Head = ({ onChooseFont,  onfonts , onsetFont}) => {
     
         <div className="relative ">
           <select value={onfonts} onClick={onChooseFont} onChange={(e)=>onsetFont(e.target.value)} className="appearance-none  pr-6 w-full focus:outline-none focus:ring-2 focus:ring-blue-500">
-            <option className="font-sans">Sans Serif</option>
+            <option value = {fontSans} onChange={(e)=>setFontSans (e.target.value)}  className="font-sans">Sans Serif</option>
             <option value = {fontSerif} onChange={(e)=>setFontSerif(e.target.value)} className="font-serif ">Serif</option>
             <option value = {fontmono} onChange={(e)=>setFontMono(e.target.value)} className="font-mono">Mono</option>
           </select>

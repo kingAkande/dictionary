@@ -86,12 +86,16 @@ function App() {
   const verbmeaning = wordMeaning.find((x) => x.partOfSpeech === "verb") || {};
   const { definitions: verbDefinitions = [] } = verbmeaning;
 
-    const [fonts , setFonts] = useState("");
+    const [fonts , setFonts] = useState("font-sans");
   
  function chooseFont(){
     setFonts(fonts)
-    console.log("this is mon", fonts)
+    // console.log("this is mon", fonts)
   }
+
+  const dictionaryFonts = fonts;
+
+  console.log("this is " , dictionaryFonts)
 
 
   return (
@@ -112,7 +116,7 @@ function App() {
           sourceLink={sourceUrls}
           sourceLinkHandler={handleSourceClick}
           audioLink = {phonetics}
-          fonT = {fonts}
+          dictionaryFonts = {dictionaryFonts}
         />
 
       </div>

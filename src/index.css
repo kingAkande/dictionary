@@ -1,6 +1,17 @@
+/* */
 @import url('https://fonts.googleapis.com/css2?family=Inconsolata&display=swap');
+
+@import url('https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@1,14..32&display=swap');
+
+@import url('https://fonts.googleapis.com/css2?family=Lora:wght@400..700&display=swap');
+
+@import url('https://fonts.googleapis.com/css2?family=Tourney&display=swap');
+
+@import url('https://fonts.googleapis.com/css2?family=Grandstander&display=swap');
 @import "tailwindcss";
 
 
-
-
+/* :root {
+    font-family: "Irish Grover", system-ui;
+    src: url('https://fonts.googleapis.com/css2?family=Irish+Grover&display=swap');
+} */

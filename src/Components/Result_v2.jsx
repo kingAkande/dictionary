@@ -10,18 +10,14 @@ const Result_v2 = ({
   synonymsApi,
   sourceLink,
   sourceLinkHandler,
-  fonT
+  dictionaryFonts,
 }) => {
+  const distinctFonts = dictionaryFonts;
 
-  const distinctFonts = fonT;
- 
-
-  console.log("here is " , distinctFonts) 
+  console.log("here is ", distinctFonts);
   return (
     <>
       <div className="w-[736px]  ">
-
-
         <Parts_of_speech Parts_of_speech="Noun">
           {nounMeaning
             .map((x, i) => (
@@ -32,14 +28,23 @@ const Result_v2 = ({
               </ul>
             ))
             .slice(0, 3)}
-
         </Parts_of_speech>
 
         <div className="flex gap-12 mt-14 ">
           <h1 className="text-2xl text-[#757575] w-[96px] h-[26px] ">
             Synonyms
           </h1>
-          <p className=" text-2xl text-[#A445ED] font-bold font-[lora]">
+          <p
+            className={`text-2xl text-[#A445ED] font-bold ${
+              distinctFonts === "font-sans"
+                ? "font-[Inter]"
+                : distinctFonts === "font-serif"
+                ? "font-[Lora]"
+                : distinctFonts === "font-mono"
+                ? "font-[Inconsolata]"
+                : ""
+            }`}
+          >
             {synonymsApi
               .map((x) => x)
               .slice(0, 6)
@@ -50,7 +55,7 @@ const Result_v2 = ({
       {/* {verbDefinitions.map((x)=> <ul>{x?.definition}</ul>)} */}
       <Parts_of_speech Parts_of_speech="Verb" styl="mt-12">
         {verbMeaning
-          .map((x,i) => (
+          .map((x, i) => (
             <ul key={i} className="mt-6 ml-4 space-y-4">
               <li className="list-none before:content-['•'] before:text-[#8F19E8] before:mr-3 ">
                 {x?.definition}
