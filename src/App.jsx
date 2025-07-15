@@ -61,7 +61,7 @@ function App() {
 
       getDefinitions();
       return () => {
-        controller.abort();
+        controller.abort(); 
       };
     },
     [word]

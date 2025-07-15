@@ -1,10 +1,12 @@
-import React from "react";
+import React, { useState } from "react";
 import book from "../assets/Shape.png";
 import moon from "../assets/iconoir_half-moon.png";
 import Switch from "./Switch";
 import rectangle from "../assets/Rectangle.png"
 
 const Head = () => {
+  const [fonts , setFonts] = useState({});
+  
   return (
     <div className="w-[736.99px] h-[36.5px] flex justify-between items-center ">
       <div>
