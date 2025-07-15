@@ -12,7 +12,7 @@ const Parts_of_speech = ({ Parts_of_speech, children, styl }) => {
           alt="rectangleimage2"
         />
       </div>
-      <div className="w-[721.02px] font-sans">
+      <div className="w-[721.02px] ">
         <h1 className="text-2xl text-[#757575] w-[82px]  ">Meaning</h1>
         {children}
       </div>

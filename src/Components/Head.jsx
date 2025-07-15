@@ -3,10 +3,34 @@ import book from "../assets/Shape.png";
 import moon from "../assets/iconoir_half-moon.png";
 import Switch from "./Switch";
 import rectangle from "../assets/Rectangle.png"
+import { Link } from "react-router-dom";
 
-const Head = () => {
-  const [fonts , setFonts] = useState({});
+const Head = ({ onChooseFont,  onfonts , onsetFont}) => {
+
+
+  // const availableFonts = [{name:"" , Link: ""}]
+
   
+  // const [fontSans , setFontSans] = useState("font-sans")
+  
+  const [fontSerif , setFontSerif] = useState("font-serif")
+  
+  const [fontmono , setFontMono] = useState("font-mono");
+
+
+  // function chooseSerif(){
+
+  // }
+
+  // function chooseSans(){
+
+  // }
+
+  // function chooseMono(){
+  //   setmono((fontmono)=> !fontmono)
+  // }
+
+
   return (
     <div className="w-[736.99px] h-[36.5px] flex justify-between items-center ">
       <div>
@@ -15,10 +39,10 @@ const Head = () => {
       <div className=" flex gap-3">
     
         <div className="relative ">
-          <select className="appearance-none  pr-6 w-full focus:outline-none focus:ring-2 focus:ring-blue-500">
-            <option>Sans Serif</option>
-            <option>Serif</option>
-            <option>Mono</option>
+          <select value={onfonts} onClick={onChooseFont} onChange={(e)=>onsetFont(e.target.value)} className="appearance-none  pr-6 w-full focus:outline-none focus:ring-2 focus:ring-blue-500">
+            <option className="font-sans">Sans Serif</option>
+            <option value = {fontSerif} onChange={(e)=>setFontSerif(e.target.value)} className="font-serif ">Serif</option>
+            <option value = {fontmono} onChange={(e)=>setFontMono(e.target.value)} className="font-mono">Mono</option>
           </select>
           {/* <!-- Custom arrow using CSS --> */}
           <div className="absolute inset-y-0 right-0 flex items-center  pointer-events-none">

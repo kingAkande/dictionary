@@ -12,7 +12,8 @@ const Word_Result = ({
   sourceLinkHandler,
   audioLink,
    loading,
-   loadcomponent
+   loadcomponent,
+   fonT
 }) => {
   return (
     <div className="w-[737px] border  mt-8">
@@ -23,6 +24,7 @@ const Word_Result = ({
         synonymsApi={synonymsApi}
         sourceLink={sourceLink}
         sourceLinkHandler={sourceLinkHandler}
+        font={fonT}
       />
     </div>
   );

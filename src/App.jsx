@@ -86,11 +86,18 @@ function App() {
   const verbmeaning = wordMeaning.find((x) => x.partOfSpeech === "verb") || {};
   const { definitions: verbDefinitions = [] } = verbmeaning;
 
+    const [fonts , setFonts] = useState("");
+  
+ function chooseFont(){
+    setFonts(fonts)
+    console.log("this is mon", fonts)
+  }
+
 
   return (
     <>
-      <div className="p-4 ">
-        <Head />
+      <div className={ ` p-4 ${fonts}` }>
+        <Head onChooseFont={chooseFont} onfonts={fonts} onsetFont={setFonts} />
 
         <Search_Field searchWord={word} setword={setWord} />
 
@@ -105,6 +112,7 @@ function App() {
           sourceLink={sourceUrls}
           sourceLinkHandler={handleSourceClick}
           audioLink = {phonetics}
+          fonT = {fonts}
         />
 
       </div>

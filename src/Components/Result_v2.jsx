@@ -10,7 +10,13 @@ const Result_v2 = ({
   synonymsApi,
   sourceLink,
   sourceLinkHandler,
+  fonT
 }) => {
+
+  const distinctFonts = fonT;
+ 
+
+  console.log("here is " , distinctFonts) 
   return (
     <>
       <div className="w-[736px]  ">
@@ -64,7 +70,7 @@ const Result_v2 = ({
         </ul> */}
       </Parts_of_speech>
       <img src={rectangle3} alt="rectangle3" className="mt-8" />
-      <div className="flex gap-12 mt-4 font-serif ">
+      <div className="flex gap-12 mt-4 ">
         <h1 className="  text-[#757575] w-[48px] h-[18px] ">Source</h1>
         <div>
           <a
