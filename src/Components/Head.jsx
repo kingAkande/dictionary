@@ -39,10 +39,10 @@ const Head = ({ onChooseFont,  onfonts , onsetFont}) => {
       <div className=" flex gap-3">
     
         <div className="relative ">
-          <select value={onfonts} onClick={onChooseFont} onChange={(e)=>onsetFont(e.target.value)} className="appearance-none  pr-6 w-full focus:outline-none focus:ring-2 focus:ring-blue-500">
-            <option value = {fontSans} onChange={(e)=>setFontSans (e.target.value)}  className="font-sans">Sans Serif</option>
-            <option value = {fontSerif} onChange={(e)=>setFontSerif(e.target.value)} className="font-serif ">Serif</option>
-            <option value = {fontmono} onChange={(e)=>setFontMono(e.target.value)} className="font-mono">Mono</option>
+          <select value={onfonts} onClick={onChooseFont} onChange={(e)=>onsetFont(e.target.value)} className="appearance-none font-bold  pr-6 w-full focus:outline-none focus:ring-2 focus:ring-blue-500">
+            <option value = {fontSans} onChange={(e)=>setFontSans (e.target.value)}  className="font-[Inter] font-bold text-[#2D2D2D]">Sans Serif</option>
+            <option value = {fontSerif} onChange={(e)=>setFontSerif(e.target.value)} className="font-[Lora] ">Serif</option>
+            <option value = {fontmono} onChange={(e)=>setFontMono(e.target.value)} className="font-[Inconsolata]">Mono</option>
           </select>
           {/* <!-- Custom arrow using CSS --> */}
           <div className="absolute inset-y-0 right-0 flex items-center  pointer-events-none">

@@ -47,7 +47,7 @@ const Result_v2 = ({
           >
             {synonymsApi
               .map((x) => x)
-              .slice(0, 6)
+              .slice(0, 4)
               .toString("")}
           </p>
         </div>
@@ -60,7 +60,7 @@ const Result_v2 = ({
               <li className="list-none before:content-['•'] before:text-[#8F19E8] before:mr-3 ">
                 {x?.definition}
               </li>
-              <p className="ml-5"> {x?.example ? `"${x?.example}"` : ""}</p>
+              <p className="ml-5 text-[#757575]"> {x?.example ? `"${x?.example}"` : ""}</p>
             </ul>
           ))
           .slice(0, 3)}
