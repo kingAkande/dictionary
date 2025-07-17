@@ -13,7 +13,7 @@ function App() {
   const [apiResponse, setapiResponse] = useState(
     location.state?.apiResponse || null
   );
-  const [isLoading , setisLoading] = useState(false);
+  const [isLoading, setisLoading] = useState(false);
 
   const handleSourceClick = (url) => {
     navigate("/source", {
@@ -25,13 +25,12 @@ function App() {
     });
   };
 
-
   useEffect(
     function () {
       if (!word) return;
       const controller = new AbortController();
       async function getDefinitions() {
-        setisLoading(true)
+        setisLoading(true);
         try {
           const res = await fetch(
             `https://api.dictionaryapi.dev/api/v2/entries/en/${word}`,
@@ -50,18 +49,17 @@ function App() {
           const data = await res.json();
           console.log(data);
           setapiResponse(data);
-          setisLoading(false)
-        
+          setisLoading(false);
         } catch (err) {
           if (err.name !== "AbortError") {
             console.error(err);
           }
-        } 
+        }
       }
 
       getDefinitions();
       return () => {
-        controller.abort(); 
+        controller.abort();
       };
     },
     [word]
@@ -76,38 +74,44 @@ function App() {
     sourceUrls = [],
   } = firstEntry;
 
-
-
   const wordMeaning = meanings;
   const nounpart = wordMeaning.find((x) => x.partOfSpeech === "noun") || {};
   const { definitions = [], synonyms = [] } = nounpart;
 
-
   const verbmeaning = wordMeaning.find((x) => x.partOfSpeech === "verb") || {};
   const { definitions: verbDefinitions = [] } = verbmeaning;
 
-    const [fonts , setFonts] = useState("font-sans");
-  
- function chooseFont(){
-    setFonts(fonts)
+  const [fonts, setFonts] = useState("font-sans");
+
+  function chooseFont() {
+    setFonts(fonts);
     // console.log("this is mon", fonts)
   }
 
   const dictionaryFonts = fonts;
 
-  console.log("this is " , dictionaryFonts)
+  // console.log("this is " , dictionaryFonts)
 
+  const [checked, setChecked] = useState(false);
 
   return (
     <>
-      <div className={ ` p-4 ${fonts}` }>
-        <Head onChooseFont={chooseFont} onfonts={fonts} onsetFont={setFonts} />
+      <div className={` flex justify-center ${fonts} ${checked && "bg-[#050505] text-[#FFFFFF]" }`}>
+        <div className={`mt-8`}>
 
-        <Search_Field searchWord={word} setword={setWord} />
+        <Head
+          onChecked={checked}
+          onSetChecked={setChecked}
+          onChooseFont={chooseFont}
+          onfonts={fonts}
+          onsetFont={setFonts}
+        />
+
+        <Search_Field  onChecked={checked} searchWord={word} setword={setWord} />
 
         <Word_Result
-          loading= {isLoading}
-          loadcomponent={<Loading/>}
+          loading={isLoading}
+          loadcomponent={<Loading />}
           synonymsApi={synonyms}
           nounMeaning={definitions}
           wordApi={apiWord}
@@ -115,10 +119,11 @@ function App() {
           verbMeaning={verbDefinitions}
           sourceLink={sourceUrls}
           sourceLinkHandler={handleSourceClick}
-          audioLink = {phonetics}
-          dictionaryFonts = {dictionaryFonts}
+          audioLink={phonetics}
+          dictionaryFonts={dictionaryFonts}
+           onChecked={checked}
         />
-
+        </div>
       </div>
     </>
   );
@@ -126,10 +131,10 @@ function App() {
 
 export default App;
 
-function Loading(){
-  return(
-    <div  className=" h-[100px] flex items-center">
+function Loading() {
+  return (
+    <div className=" h-[100px] flex items-center">
       <h1 className="text-3xl bold "> Loading...</h1>
-     </div>
-  )
+    </div>
+  );
 }
