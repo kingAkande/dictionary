@@ -52,7 +52,6 @@ const Result_v2 = ({
           </p>
         </div>
       </div>
-      {/* {verbDefinitions.map((x)=> <ul>{x?.definition}</ul>)} */}
       <Parts_of_speech Parts_of_speech="Verb" styl="mt-12">
         {verbMeaning
           .map((x, i) => (

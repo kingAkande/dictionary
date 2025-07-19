@@ -5,7 +5,6 @@ import rectangle from "../assets/Rectangle.png";
 import { Link } from "react-router-dom";
 
 const Head = ({onChecked ,onSetChecked,  onChooseFont, onfonts, onsetFont }) => {
-  // const availableFonts = [{name:"" , Link: ""}]
 
   const [fontSans, setFontSans] = useState("font-sans");
 
@@ -13,17 +12,6 @@ const Head = ({onChecked ,onSetChecked,  onChooseFont, onfonts, onsetFont }) => 
 
   const [fontmono, setFontMono] = useState("font-mono");
 
-  // function chooseSerif(){
-
-  // }
-
-  // function chooseSans(){
-
-  // }
-
-  // function chooseMono(){
-  //   setmono((fontmono)=> !fontmono)
-  // }
 
   return (
     <div className="w-[736.99px] h-[36.5px] flex justify-between items-center ">
@@ -97,5 +85,3 @@ const Head = ({onChecked ,onSetChecked,  onChooseFont, onfonts, onsetFont }) => 
 };
 
 export default Head;
-
-//${!onChecked ? "bg-[#979797]" : "bg-[#A445ED]"}

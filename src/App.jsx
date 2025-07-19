@@ -13,6 +13,19 @@ function App() {
   const [apiResponse, setapiResponse] = useState(
     location.state?.apiResponse || null
   );
+
+  // const [checked, setChecked] = useState(location.state?.checked || false);
+
+  const [checked, setChecked] = useState(()=>{
+    const keepchecked = localStorage.getItem("checked");
+    return keepchecked ? JSON.parse(keepchecked) : false
+  });
+
+  useEffect(()=>{
+    localStorage.setItem("checked", JSON.stringify(checked))
+  },[checked])
+
+
   const [isLoading, setisLoading] = useState(false);
 
   const handleSourceClick = (url) => {
@@ -20,6 +33,7 @@ function App() {
       state: {
         word,
         apiResponse,
+        // checked,
         sourceUrl: url,
       },
     });
@@ -81,19 +95,20 @@ function App() {
   const verbmeaning = wordMeaning.find((x) => x.partOfSpeech === "verb") || {};
   const { definitions: verbDefinitions = [] } = verbmeaning;
 
-  const [fonts, setFonts] = useState("font-sans");
+  const [fonts, setFonts] = useState(()=>{
+    const saveFonts = localStorage.getItem("fonts");
+    return saveFonts ? JSON.parse(saveFonts) : "font-sans"
+  });
 
   function chooseFont() {
     setFonts(fonts);
-    // console.log("this is mon", fonts)
   }
 
   const dictionaryFonts = fonts;
 
-  // console.log("this is " , dictionaryFonts)
-
-  const [checked, setChecked] = useState(false);
-
+useEffect(()=>{
+  localStorage.setItem("fonts" , JSON.stringify(fonts))
+},[fonts])
   return (
     <>
       <div className={` flex justify-center ${fonts} ${checked && "bg-[#050505] text-[#FFFFFF]" }`}>
