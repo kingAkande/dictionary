@@ -5,6 +5,22 @@ import Switch from "./Components/Switch";
 import Search_Field from "./Components/Search_Field";
 import Word_Result from "./Components/Word_Result";
 
+
+function useDebounce(value, delay) {
+  const [debouncedValue, setDebouncedValue] = useState(value);
+
+  useEffect(() => {
+    const handler = setTimeout(() => {
+      setDebouncedValue(value);
+    }, delay);
+
+    return () => clearTimeout(handler);
+  }, [value, delay]);
+
+  return debouncedValue;
+}
+
+
 function App() {
   const navigate = useNavigate();
   const location = useLocation();
@@ -14,7 +30,90 @@ function App() {
     location.state?.apiResponse || null
   );
 
-  // const [checked, setChecked] = useState(location.state?.checked || false);
+  const debouncedQuery = useDebounce(word, 500);
+
+//   useEffect(() => {
+//   if (debouncedQuery.trim().length >= 2) { // Only search if 2+ characters
+
+//    const controller = new AbortController();
+//       async function getDefinitions() {
+//         setisLoading(true);
+//         try {
+//           const res = await fetch(
+//             `https://api.dictionaryapi.dev/api/v2/entries/en/${debouncedQuery}`,
+//             { signal: controller.signal }
+//           );
+
+//           if (!res.ok) {
+//             // Handle 404 or other HTTP errors
+//             if (res.status === 404) {
+//               console.log("Word not found");
+//               return;
+//             }
+//             throw new Error(`HTTP error! status: ${res.status}`);
+//           }
+
+//           const data = await res.json();
+//           console.log(data);
+//           setapiResponse(data);
+//           setisLoading(false);
+//         } catch (err) {
+//           if (err.name !== "AbortError") {
+//             console.error(err);
+//           }
+//         }
+//       }
+
+//       getDefinitions();
+
+//       return () => controller.abort();
+
+    
+//   }
+// }, [debouncedQuery]);
+
+useEffect(() => {
+  if (debouncedQuery.trim().length >= 1) {
+    const controller = new AbortController();
+    
+    async function getDefinitions() {
+      setisLoading(true);
+      try {
+        const res = await fetch(
+          `https://api.dictionaryapi.dev/api/v2/entries/en/${debouncedQuery}`,
+          { signal: controller.signal }
+        );
+        
+        if (!res.ok) {
+          if (res.status === 404) {
+            console.log("Word not found");
+            setisLoading(false); // Add this
+            return;
+          }
+          throw new Error(`HTTP error! status: ${res.status}`);
+        }
+        
+        const data = await res.json();
+        console.log(data);
+        setapiResponse(data);
+      } catch (err) {
+        if (err.name !== "AbortError") {
+          console.error(err);
+        }
+      } finally {
+        setisLoading(false); // This ensures loading stops in all cases
+      }
+    }
+    
+    getDefinitions();
+    
+    return () => controller.abort();
+  } else {
+    // Clear results when query is too short
+    setapiResponse(null); // or [] depending on your initial state
+    setisLoading(false);
+  }
+}, [debouncedQuery]);
 
   const [checked, setChecked] = useState(()=>{
     const keepchecked = localStorage.getItem("checked");
@@ -39,45 +138,45 @@ function App() {
     });
   };
 
-  useEffect(
-    function () {
-      if (!word) return;
-      const controller = new AbortController();
-      async function getDefinitions() {
-        setisLoading(true);
-        try {
-          const res = await fetch(
-            `https://api.dictionaryapi.dev/api/v2/entries/en/${word}`,
-            { signal: controller.signal }
-          );
+  // useEffect(
+  //   function () {
+  //     if (!word) return;
+  //     const controller = new AbortController();
+  //     async function getDefinitions() {
+  //       setisLoading(true);
+  //       try {
+  //         const res = await fetch(
+  //           `https://api.dictionaryapi.dev/api/v2/entries/en/${word}`,
+  //           { signal: controller.signal }
+  //         );
 
-          if (!res.ok) {
-            // Handle 404 or other HTTP errors
-            if (res.status === 404) {
-              console.log("Word not found");
-              return;
-            }
-            throw new Error(`HTTP error! status: ${res.status}`);
-          }
+  //         if (!res.ok) {
+  //           // Handle 404 or other HTTP errors
+  //           if (res.status === 404) {
+  //             console.log("Word not found");
+  //             return;
+  //           }
+  //           throw new Error(`HTTP error! status: ${res.status}`);
+  //         }
 
-          const data = await res.json();
-          console.log(data);
-          setapiResponse(data);
-          setisLoading(false);
-        } catch (err) {
-          if (err.name !== "AbortError") {
-            console.error(err);
-          }
-        }
-      }
+  //         const data = await res.json();
+  //         console.log(data);
+  //         setapiResponse(data);
+  //         setisLoading(false);
+  //       } catch (err) {
+  //         if (err.name !== "AbortError") {
+  //           console.error(err);
+  //         }
+  //       }
+  //     }
 
-      getDefinitions();
-      return () => {
-        controller.abort();
-      };
-    },
-    [word]
-  );
+  //     getDefinitions();
+
+  //     return () => controller.abort();
+    
+  //   },
+  //   [word]
+  // );
 
   const firstEntry = apiResponse?.[0] || {};
   const {
@@ -111,7 +210,7 @@ useEffect(()=>{
 },[fonts])
   return (
     <>
-      <div className={` flex justify-center ${fonts} ${checked && "bg-[#050505] text-[#FFFFFF]" }`}>
+      <div className={`min-h-screen flex justify-center ${fonts} ${checked && "bg-[#050505] text-[#FFFFFF]" }`}>
         <div className={`mt-8`}>
 
         <Head
@@ -153,3 +252,5 @@ function Loading() {
     </div>
   );
 }
+
+
