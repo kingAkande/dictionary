@@ -14,11 +14,13 @@ const Word_Result = ({
    loading,
    loadcomponent,
    dictionaryFonts,
-  onChecked
+  onChecked,
+  debouncedQuery,
+  emptyFieldError
 }) => {
   return (
     <div className="w-[737px] border  mt-8">
-     {loading ? loadcomponent : <Result_v1  onChecked={onChecked} audioLink={audioLink} wordApi={wordApi} phoneticText={phoneticText} />}
+     {loading ? loadcomponent : <Result_v1 emptyFieldError={emptyFieldError} debouncedQuery={debouncedQuery} onChecked={onChecked} audioLink={audioLink} wordApi={wordApi} phoneticText={phoneticText} />}
       <Result_v2
         nounMeaning={nounMeaning}
         verbMeaning={verbMeaning}

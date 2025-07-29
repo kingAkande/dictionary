@@ -72,6 +72,8 @@ function App() {
 //   }
 // }, [debouncedQuery]);
 
+const [hasSearched, setHasSearched] = useState(false);
+
 useEffect(() => {
   if (debouncedQuery.trim().length >= 1) {
     const controller = new AbortController();
@@ -208,6 +210,10 @@ useEffect(() => {
 useEffect(()=>{
   localStorage.setItem("fonts" , JSON.stringify(fonts))
 },[fonts])
+
+
+
+
   return (
     <>
       <div className={`min-h-screen flex justify-center ${fonts} ${checked && "bg-[#050505] text-[#FFFFFF]" }`}>
@@ -221,7 +227,7 @@ useEffect(()=>{
           onsetFont={setFonts}
         />
 
-        <Search_Field  onChecked={checked} searchWord={word} setword={setWord} />
+        <Search_Field hasSearched={hasSearched} setHasSearched={setHasSearched} debouncedQuery={debouncedQuery}  onChecked={checked} searchWord={word} setword={setWord} />
 
         <Word_Result
           loading={isLoading}
@@ -236,6 +242,7 @@ useEffect(()=>{
           audioLink={phonetics}
           dictionaryFonts={dictionaryFonts}
            onChecked={checked}
+           debouncedQuery={debouncedQuery}
         />
         </div>
       </div>
