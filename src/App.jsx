@@ -4,7 +4,7 @@ import Head from "./Components/Head";
 import Switch from "./Components/Switch";
 import Search_Field from "./Components/Search_Field";
 import Word_Result from "./Components/Word_Result";
-
+import emoji from "./assets/emoji.png";
 
 function useDebounce(value, delay) {
   const [debouncedValue, setDebouncedValue] = useState(value);
@@ -20,7 +20,6 @@ function useDebounce(value, delay) {
   return debouncedValue;
 }
 
-
 function App() {
   const navigate = useNavigate();
   const location = useLocation();
@@ -32,100 +31,116 @@ function App() {
 
   const debouncedQuery = useDebounce(word, 500);
 
-//   useEffect(() => {
-//   if (debouncedQuery.trim().length >= 2) { // Only search if 2+ characters
+  //   useEffect(() => {
+  //   if (debouncedQuery.trim().length >= 2) { // Only search if 2+ characters
 
-//    const controller = new AbortController();
-//       async function getDefinitions() {
-//         setisLoading(true);
-//         try {
-//           const res = await fetch(
-//             `https://api.dictionaryapi.dev/api/v2/entries/en/${debouncedQuery}`,
-//             { signal: controller.signal }
-//           );
+  //    const controller = new AbortController();
+  //       async function getDefinitions() {
+  //         setisLoading(true);
+  //         try {
+  //           const res = await fetch(
+  //             `https://api.dictionaryapi.dev/api/v2/entries/en/${debouncedQuery}`,
+  //             { signal: controller.signal }
+  //           );
 
-//           if (!res.ok) {
-//             // Handle 404 or other HTTP errors
-//             if (res.status === 404) {
-//               console.log("Word not found");
-//               return;
-//             }
-//             throw new Error(`HTTP error! status: ${res.status}`);
-//           }
+  //           if (!res.ok) {
+  //             // Handle 404 or other HTTP errors
+  //             if (res.status === 404) {
+  //               console.log("Word not found");
+  //               return;
+  //             }
+  //             throw new Error(`HTTP error! status: ${res.status}`);
+  //           }
 
-//           const data = await res.json();
-//           console.log(data);
-//           setapiResponse(data);
-//           setisLoading(false);
-//         } catch (err) {
-//           if (err.name !== "AbortError") {
-//             console.error(err);
-//           }
-//         }
-//       }
+  //           const data = await res.json();
+  //           console.log(data);
+  //           setapiResponse(data);
+  //           setisLoading(false);
+  //         } catch (err) {
+  //           if (err.name !== "AbortError") {
+  //             console.error(err);
+  //           }
+  //         }
+  //       }
 
-//       getDefinitions();
+  //       getDefinitions();
 
-//       return () => controller.abort();
+  //       return () => controller.abort();
 
-    
-//   }
-// }, [debouncedQuery]);
+  //   }
+  // }, [debouncedQuery]);
 
-const [hasSearched, setHasSearched] = useState(false);
+  const [hasSearched, setHasSearched] = useState(false);
+  const [showEmptyError, setShowEmptyError] = useState(false);
+  // const [onDisplay, setonDisplay] = useState(false);
+  const [message, setMessage] = useState("");
 
-useEffect(() => {
-  if (debouncedQuery.trim().length >= 1) {
-    const controller = new AbortController();
-    
-    async function getDefinitions() {
-      setisLoading(true);
-      try {
-        const res = await fetch(
-          `https://api.dictionaryapi.dev/api/v2/entries/en/${debouncedQuery}`,
-          { signal: controller.signal }
-        );
-        
-        if (!res.ok) {
-          if (res.status === 404) {
-            console.log("Word not found");
-            setisLoading(false); // Add this
-            return;
+  useEffect(() => {
+    if (debouncedQuery?.trim().length >= 1) {
+      setShowEmptyError(false);
+      const controller = new AbortController();
+
+      async function getDefinitions() {
+        setisLoading(true);
+        try {
+          const res = await fetch(
+            `https://api.dictionaryapi.dev/api/v2/entries/en/${debouncedQuery}`,
+            { signal: controller.signal }
+          );
+
+          // if (res.ok ) {
+          //   setonDisplay((prev)=>!prev);
+          //   setMessage("")
+          // }
+
+          if (!res.ok) {
+            if (res.status === 404) {
+              console.log("Word not found");
+              setMessage("Word not found");
+              setisLoading(false); // Add this
+              return;
+            }
+            throw new Error(`HTTP error! status: ${res.status}`);
+            
           }
-          throw new Error(`HTTP error! status: ${res.status}`);
+
+          // if(!res.ok){
+          //   throw new Error(`"na the error b this"  ${res.status}`);
+          // }
+
+          const data = await res.json();
+          // console.log(data);
+          setapiResponse(data);
+        } catch (err) {
+          if (err.name !== "AbortError") {
+            console.error(err);
+          }
+        } finally {
+          setisLoading(false); // This ensures loading stops in all cases
         }
-        
-        const data = await res.json();
-        console.log(data);
-        setapiResponse(data);
-      } catch (err) {
-        if (err.name !== "AbortError") {
-          console.error(err);
-        }
-      } finally {
-        setisLoading(false); // This ensures loading stops in all cases
+      }
+
+      getDefinitions();
+
+      return () => controller.abort();
+    } else {
+      // Clear results when query is too short
+      setapiResponse(null); // or [] depending on your initial state
+      setisLoading(false);
+      if (hasSearched && (!word || word?.trim().length === 0)) {
+        setShowEmptyError(true);
       }
     }
-    
-    getDefinitions();
-    
-    return () => controller.abort();
-  } else {
-    // Clear results when query is too short
-    setapiResponse(null); // or [] depending on your initial state
-    setisLoading(false);
-  }
-}, [debouncedQuery]);
+  }, [debouncedQuery, word, hasSearched]);
 
-  const [checked, setChecked] = useState(()=>{
+  const [checked, setChecked] = useState(() => {
     const keepchecked = localStorage.getItem("checked");
-    return keepchecked ? JSON.parse(keepchecked) : false
+    return keepchecked ? JSON.parse(keepchecked) : false;
   });
 
-  useEffect(()=>{
-    localStorage.setItem("checked", JSON.stringify(checked))
-  },[checked])
-
+  useEffect(() => {
+    localStorage.setItem("checked", JSON.stringify(checked));
+  }, [checked]);
 
   const [isLoading, setisLoading] = useState(false);
 
@@ -175,7 +190,7 @@ useEffect(() => {
   //     getDefinitions();
 
   //     return () => controller.abort();
-    
+
   //   },
   //   [word]
   // );
@@ -196,9 +211,9 @@ useEffect(() => {
   const verbmeaning = wordMeaning.find((x) => x.partOfSpeech === "verb") || {};
   const { definitions: verbDefinitions = [] } = verbmeaning;
 
-  const [fonts, setFonts] = useState(()=>{
+  const [fonts, setFonts] = useState(() => {
     const saveFonts = localStorage.getItem("fonts");
-    return saveFonts ? JSON.parse(saveFonts) : "font-sans"
+    return saveFonts ? JSON.parse(saveFonts) : "font-sans";
   });
 
   function chooseFont() {
@@ -207,43 +222,54 @@ useEffect(() => {
 
   const dictionaryFonts = fonts;
 
-useEffect(()=>{
-  localStorage.setItem("fonts" , JSON.stringify(fonts))
-},[fonts])
-
-
-
+  useEffect(() => {
+    localStorage.setItem("fonts", JSON.stringify(fonts));
+  }, [fonts]);
 
   return (
     <>
-      <div className={`min-h-screen flex justify-center ${fonts} ${checked && "bg-[#050505] text-[#FFFFFF]" }`}>
+      <div
+        className={`min-h-screen flex justify-center ${fonts} ${
+          checked && "bg-[#050505] text-[#FFFFFF]"
+        }`}
+      >
         <div className={`mt-8`}>
+          <Head
+            onChecked={checked}
+            onSetChecked={setChecked}
+            onChooseFont={chooseFont}
+            onfonts={fonts}
+            onsetFont={setFonts}
+          />
 
-        <Head
-          onChecked={checked}
-          onSetChecked={setChecked}
-          onChooseFont={chooseFont}
-          onfonts={fonts}
-          onsetFont={setFonts}
-        />
+          <Search_Field
+            setShowEmptyError={setShowEmptyError}
+            showEmptyError={showEmptyError}
+            hasSearched={hasSearched}
+            setHasSearched={setHasSearched}
+            debouncedQuery={debouncedQuery}
+            onChecked={checked}
+            searchWord={word}
+            setword={setWord}
+          />
 
-        <Search_Field hasSearched={hasSearched} setHasSearched={setHasSearched} debouncedQuery={debouncedQuery}  onChecked={checked} searchWord={word} setword={setWord} />
-
-        <Word_Result
-          loading={isLoading}
-          loadcomponent={<Loading />}
-          synonymsApi={synonyms}
-          nounMeaning={definitions}
-          wordApi={apiWord}
-          phoneticText={phonetic}
-          verbMeaning={verbDefinitions}
-          sourceLink={sourceUrls}
-          sourceLinkHandler={handleSourceClick}
-          audioLink={phonetics}
-          dictionaryFonts={dictionaryFonts}
-           onChecked={checked}
-           debouncedQuery={debouncedQuery}
-        />
+              {apiResponse && <Word_Result
+                loading={isLoading}
+                loadcomponent={<Loading />}
+                synonymsApi={synonyms}
+                nounMeaning={definitions}
+                wordApi={apiWord}
+                phoneticText={phonetic}
+                verbMeaning={verbDefinitions}
+                sourceLink={sourceUrls}
+                sourceLinkHandler={handleSourceClick}
+                audioLink={phonetics}
+                dictionaryFonts={dictionaryFonts}
+                onChecked={checked}
+                debouncedQuery={debouncedQuery}
+              />}
+          
+             {message === "Word not found"&&debouncedQuery && <ErrorMessage /> }
         </div>
       </div>
     </>
@@ -260,4 +286,16 @@ function Loading() {
   );
 }
 
-
+function ErrorMessage() {
+  return (
+    <div className="flex  flex-col gap-6 items-center w-[736px] mt-24">
+      <img className="mb-4" src={emoji} alt="emoji" />
+      <h1>No definitions found</h1>
+      <p>
+        Sorry pal, we couldn't find definitions for the word you were looking
+        for. You can try the search again at later time or head to the web
+        instead.
+      </p>
+    </div>
+  );
+}

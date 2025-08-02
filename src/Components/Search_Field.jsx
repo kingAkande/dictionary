@@ -2,10 +2,10 @@ import React, { useState } from "react";
 import search_button from "../assets/searchButtton.png";
 
 const Search_Field = ({
-  error,
+    showEmptyError,
+  setShowEmptyError,  
   setHasSearched,
   hasSearched,
-  debouncedQuery,
   onChecked,
   word,
   setword,
@@ -14,13 +14,12 @@ const Search_Field = ({
     e.preventDefault();
     if (word == "") return;
 
-    setword(e.target.value)
+    setword(e.target.value?.trim())
 
-    if (e.target.value.trim().length > 0 && !hasSearched) {
+    if (e.target.value?.trim().length > 0 && !hasSearched) {
       setHasSearched(true);
     }
-    // setword("");
-    // console.log("come")
+     setShowEmptyError(false);
   }
 
   return (
@@ -28,7 +27,7 @@ const Search_Field = ({
       <div
         className={`flex flex-col justify-center  w-[736px] h-[64px] mt-10 rounded-2xl  hover:border-2 border-[#A445ED] ${
           onChecked ? "bg-[#1f1f1f]" : "bg-[#F4F4F4]"
-        } ${!debouncedQuery && "border-[#FF5252]"}`}
+        } ${showEmptyError  && "border-[#FF5252]"}`}
       >
         <form
           className=" mx-[16px] flex justify-between items-center"
@@ -51,7 +50,7 @@ const Search_Field = ({
           />
         </form>
       </div>
-      {hasSearched &&debouncedQuery.trim().length === 0 &&(
+      {showEmptyError &&(
         <p className="mt-2 text-[#FF5252]">Whoops, can't be empty...</p>
       )}
     </>

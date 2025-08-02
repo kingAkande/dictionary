@@ -26,8 +26,40 @@ const LocalStorage = () => {
       <div>
         {students.map((x,i)=> <div key={i}>{x}</div>)}
       </div>
+      <Fetching/>
     </div>
   );
 };
 
 export default LocalStorage;
+
+
+function Fetching(){
+
+async function fetch() {
+  
+  
+  const res = await fetch();
+  
+  if(!res.ok){
+    if (res.status === 404) {
+      console.error();
+    }
+    throw new Error("");
+    
+  }
+
+  const data =  await res.json()
+  console.log(data);
+} 
+
+
+
+  return(
+    <div>
+        {()=>fetch()}
+    </div>
+  )
+}
+
+
