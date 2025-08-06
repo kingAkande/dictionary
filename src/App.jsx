@@ -270,7 +270,7 @@ function App() {
                 debouncedQuery={debouncedQuery}
               />}
               {isLoading && <Loading/>}
-             {apiResponse &&!isLoading && message === "Word not found" && <ErrorMessage /> }
+             {apiResponse &&!isLoading && message === "Word not found" && <ErrorMessage checked={checked} /> }
         </div>
       </div>
     </>
@@ -287,14 +287,14 @@ function Loading() {
   );
 }
 
-function ErrorMessage() {
+function ErrorMessage({checked}) {
   return (
     <div className="flex  flex-col gap-6 items-center w-[736px] mt-24">
       <img className="mb-4" src={emoji} alt="emoji" />
-      <h1>No definitions found</h1>
-      <p>
+      <h1 className="font-bold">No definitions found</h1>
+      <p className={`${checked && "text-[#757575]"} ${"text-center" }`  }>
         Sorry pal, we couldn't find definitions for the word you were looking
-        for. You can try the search again at later time or head to the web
+        for. You can try  the search again at later time or head to the web
         instead.
       </p>
     </div>

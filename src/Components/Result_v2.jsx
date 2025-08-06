@@ -35,7 +35,7 @@ const Result_v2 = ({
             Synonyms
           </h1>
           <p
-            className={`text-2xl text-[#A445ED] font-bold ${
+            className={`text-2xl text-[#A445ED] font-bold hover:underline cursor-pointer  ${
               distinctFonts === "font-sans"
                 ? "font-[Inter]"
                 : distinctFonts === "font-serif"

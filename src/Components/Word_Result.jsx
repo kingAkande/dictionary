@@ -19,7 +19,7 @@ const Word_Result = ({
   emptyFieldError
 }) => {
   return (
-    <div className="w-[737px] border  mt-8">
+    <div className="w-[737px]   mt-8">
      {loading ? loadcomponent : <Result_v1 emptyFieldError={emptyFieldError} debouncedQuery={debouncedQuery} onChecked={onChecked} audioLink={audioLink} wordApi={wordApi} phoneticText={phoneticText} />}
       <Result_v2
         nounMeaning={nounMeaning}

@@ -33,12 +33,12 @@ import { Link } from "react-router-dom";
 //             } hover:cursor-pointer border-none border-0 `}
 //             // style={{ border: 'none', outline: 'none' }}
 //           >
-            
+
 //             <option
 //               value={fontSans}
 //               onChange={(e) => setFontSans(e.target.value)}
 //               className="font-[Inter] font-bold "
-              
+
 //             >
 //               Sans Serif
 //             </option>
@@ -53,7 +53,7 @@ import { Link } from "react-router-dom";
 //               value={fontmono}
 //               onChange={(e) => setFontMono(e.target.value)}
 //               className="font-[Inconsolata] font-bold"
-          
+
 //             >
 //               Mono
 //             </option>
@@ -98,19 +98,19 @@ import { Link } from "react-router-dom";
 //   );
 // };
 
-import { useRef, useEffect } from 'react';
+import { useRef, useEffect } from "react";
 
-const Head = ({ onChecked, onsetFont, onfonts , onSetChecked, }) => {
+const Head = ({ onChecked, onsetFont, onfonts, onSetChecked }) => {
   const [isOpen, setIsOpen] = useState(false);
   const dropdownRef = useRef(null);
 
   const fonts = [
     { value: "font-sans", label: "Sans Serif", fontClass: "font-[Inter]" },
     { value: "font-serif", label: "Serif", fontClass: "font-[Lora]" },
-    { value: "font-mono", label: "Mono", fontClass: "font-[Inconsolata]" }
+    { value: "font-mono", label: "Mono", fontClass: "font-[Inconsolata]" },
   ];
 
-  const selectedFont = fonts.find(font => font.value === onfonts) || fonts[0];
+  const selectedFont = fonts.find((font) => font.value === onfonts) || fonts[0];
 
   // Close dropdown when clicking outside
   useEffect(() => {
@@ -120,8 +120,8 @@ const Head = ({ onChecked, onsetFont, onfonts , onSetChecked, }) => {
       }
     };
 
-    document.addEventListener('mousedown', handleClickOutside);
-    return () => document.removeEventListener('mousedown', handleClickOutside);
+    document.addEventListener("mousedown", handleClickOutside);
+    return () => document.removeEventListener("mousedown", handleClickOutside);
   }, []);
 
   const handleSelect = (fontValue) => {
@@ -150,7 +150,7 @@ const Head = ({ onChecked, onsetFont, onfonts , onSetChecked, }) => {
           <div className="absolute inset-y-0 right-0 flex items-center pointer-events-none">
             <svg
               className={`w-4 h-4 mb-2 text-[#A445ED] transform transition-transform ${
-                isOpen ? 'rotate-180' : ''
+                isOpen ? "rotate-180" : ""
               }`}
               fill="none"
               stroke="#A445ED"
@@ -167,18 +167,26 @@ const Head = ({ onChecked, onsetFont, onfonts , onSetChecked, }) => {
 
           {/* Custom Dropdown Options */}
           {isOpen && (
-            <div className={`absolute pl-2 top-full left-0 mt-1 w-full min-w-[120px] hover: cursor-pointer ${
-              onChecked ? "bg-[#1F1F1F] shadow-[#A445ED] rounded-2xl " : "bg-white"
-            } shadow-lg z-50`}>
+            <div
+              className={`absolute pl-2 top-full left-0 mt-1 w-full min-w-[120px] hover: cursor-pointer ${
+                onChecked
+                  ? "bg-[#1F1F1F] shadow-[#A445ED] rounded-2xl "
+                  : "bg-white"
+              } shadow-lg z-50`}
+            >
               {fonts.map((font) => (
                 <button
                   key={font.value}
                   onClick={() => handleSelect(font.value)}
-                  className={`w-full px-2 py-2 text-left font-bold   ${font.fontClass} ${
-                    onfonts === font.value 
-                      // ? (onChecked ? "bg-[#A445ED] text-white" : "bg-[#A445ED] text-white")
-                      ?(onChecked ? "text-white " : "text-black ")
-                  :""} focus:outline-none hover: cursor-pointer hover:text-[#A445ED] `}
+                  className={`w-full px-2 py-2 text-left font-bold   ${
+                    font.fontClass
+                  } ${
+                    onfonts === font.value
+                      ? onChecked
+                        ? "text-white "
+                        : "text-black "
+                      : ""
+                  } focus:outline-none hover: cursor-pointer hover:text-[#A445ED] `}
                 >
                   {font.label}
                 </button>
