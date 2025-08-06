@@ -111,6 +111,7 @@ function App() {
           const data = await res.json();
           // console.log(data);
           setapiResponse(data);
+          setMessage("")
         } catch (err) {
           if (err.name !== "AbortError") {
             console.error(err);
@@ -253,7 +254,7 @@ function App() {
             setword={setWord}
           />
 
-              {apiResponse && <Word_Result
+              {apiResponse && message!== "Word not found" && <Word_Result
                 loading={isLoading}
                 loadcomponent={<Loading />}
                 synonymsApi={synonyms}
@@ -268,8 +269,8 @@ function App() {
                 onChecked={checked}
                 debouncedQuery={debouncedQuery}
               />}
-          
-             {message === "Word not found"&&debouncedQuery && <ErrorMessage /> }
+              {isLoading && <Loading/>}
+             {apiResponse &&!isLoading && message === "Word not found" && <ErrorMessage /> }
         </div>
       </div>
     </>

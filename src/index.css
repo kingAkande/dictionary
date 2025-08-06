@@ -15,3 +15,25 @@
     font-family: "Irish Grover", system-ui;
     src: url('https://fonts.googleapis.com/css2?family=Irish+Grover&display=swap');
 } */
+/* Remove borders from select dropdown options */
+/* select {
+  border: none !important;
+  outline: none !important;
+}
+
+select option {
+  border: none !important;
+  outline: none !important;
+  box-shadow: none !important;
+}
+
+select:focus {
+  border: none !important;
+  outline: none !important;
+  box-shadow: none !important;
+}
+
+select:focus option {
+  border: none !important;
+  outline: none !important;
+} */
