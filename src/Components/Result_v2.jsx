@@ -11,6 +11,7 @@ const Result_v2 = ({
   sourceLink,
   sourceLinkHandler,
   dictionaryFonts,
+  onChecked
 }) => {
   const distinctFonts = dictionaryFonts;
 
@@ -18,7 +19,7 @@ const Result_v2 = ({
   return (
     <>
       <div className="w-[736px]  ">
-        <Parts_of_speech Parts_of_speech="Noun">
+        <Parts_of_speech onchecked={onChecked} Parts_of_speech="Noun">
           {nounMeaning
             .map((x, i) => (
               <ul className="mt-8 ml-4 space-y-4" key={i}>

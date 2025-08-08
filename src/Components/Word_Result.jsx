@@ -11,16 +11,27 @@ const Word_Result = ({
   sourceLink,
   sourceLinkHandler,
   audioLink,
-   loading,
-   loadcomponent,
-   dictionaryFonts,
+  loading,
+  loadcomponent,
+  dictionaryFonts,
   onChecked,
   debouncedQuery,
-  emptyFieldError
+  emptyFieldError,
 }) => {
   return (
     <div className="w-[737px]   mt-8">
-     {loading ? loadcomponent : <Result_v1 emptyFieldError={emptyFieldError} debouncedQuery={debouncedQuery} onChecked={onChecked} audioLink={audioLink} wordApi={wordApi} phoneticText={phoneticText} />}
+      {loading ? (
+        loadcomponent
+      ) : (
+        <Result_v1
+          emptyFieldError={emptyFieldError}
+          debouncedQuery={debouncedQuery}
+          onChecked={onChecked}
+          audioLink={audioLink}
+          wordApi={wordApi}
+          phoneticText={phoneticText}
+        />
+      )}
       <Result_v2
         nounMeaning={nounMeaning}
         verbMeaning={verbMeaning}
@@ -28,6 +39,7 @@ const Word_Result = ({
         sourceLink={sourceLink}
         sourceLinkHandler={sourceLinkHandler}
         dictionaryFonts={dictionaryFonts}
+        onChecked={onChecked}
       />
     </div>
   );

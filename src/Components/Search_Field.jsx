@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+// import React, { useState } from "react";
 import search_button from "../assets/searchButtton.png";
 
 const Search_Field = ({
@@ -25,9 +25,9 @@ const Search_Field = ({
   return (
     <>
       <div
-        className={`flex flex-col justify-center  w-[736px] h-[64px] mt-10 rounded-2xl  hover:border-2 border-[#A445ED] hover: cursor-pointer ${
+        className={`flex flex-col justify-center  w-[736px]  h-[64px] mt-10 rounded-2xl  hover:border-2 border-[#A445ED] hover: cursor-pointer ${
           onChecked ? "bg-[#1f1f1f]" : "bg-[#F4F4F4]"
-        } ${showEmptyError && "border-[#FF5252]"}`}
+        } ${showEmptyError && "border-[#FF5252]"}   `}
       >
         <form
           className=" mx-[16px] flex justify-between items-center"

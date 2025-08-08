@@ -230,9 +230,9 @@ function App() {
   return (
     <>
       <div
-        className={`min-h-screen flex justify-center ${fonts} ${
+        className={`min-h-screen flex  justify-center ${fonts} ${
           checked && "bg-[#050505] text-[#FFFFFF]"
-        }`}
+        } `}
       >
         <div className={`mt-8`}>
           <Head
