@@ -27,24 +27,24 @@ const Result_v1 = ({ onChecked, wordApi, phoneticText, audioLink }) => {
   
 
   return (
-    <div className="w-[737px] h-[144px] flex items-center justify-between mb-6">
+    <div className="w-[327px] md:w-[689px] lg:w-[737px] h-[144px] flex items-center justify-between mb-6">
       <div>
-        <h1 className="font-bold text-7xl w-[293px] h-[77px]  ">{wordApi}</h1>
-        <p className="mt-2 text-3xl text-[#A445ED] font-sans ">
+        <h1 className="font-bold text-4xl md:text-6xl md:h-[75px]  lg:text-7xl   lg:h-[77px]  ">{wordApi}</h1>
+        <p className="mt-2 text-xl md:text-xl lg:text-3xl text-[#A445ED] font-sans ">
           {phoneticText}
         </p>
       </div>
 
       <div
         onClick={play}
-        className={ ` w-[73.47px] h-[75px] rounded-full ${
+        className={ `w-[48px] h-[48px] md:w-[75px] md:h-[75px] lg:w-[75px] lg:h-[75px] rounded-full ${
           onChecked ? "bg-[#513e5f]" : "bg-[#d8b5f1]"
         } relative hover:bg-[#A445ED] cursor-pointer `}
       >
         <svg
-          className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2  "
-          width="80"
-          height="80"
+          className=" w-[40px] h-[40px] md:w-[80px] md:h-[80px] lg:w-[80px] lg:h-[80px]  absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2  "
+          // width="lg:80"
+          // height="lg:80"
           viewBox="0 0 24 24"
           fill=""
           onMouseEnter={()=>setIsovered(true)}

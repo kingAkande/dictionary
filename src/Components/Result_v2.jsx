@@ -1,6 +1,6 @@
 import React from "react";
 import Parts_of_speech from "./Parts_of_speech";
-import rectangle3 from "../assets/Rectangle3.png";
+// import rectangle3 from "../assets/Rectangle3.png";
 import searchlogo from "../assets/search_logo.png";
 // import rectangleimage2 from "../assets/Rectangle2.png";
 
@@ -11,15 +11,15 @@ const Result_v2 = ({
   sourceLink,
   sourceLinkHandler,
   dictionaryFonts,
-  onChecked
+  onChecked,
 }) => {
   const distinctFonts = dictionaryFonts;
 
   console.log("here is ", distinctFonts);
   return (
     <>
-      <div className="w-[736px]  ">
-        <Parts_of_speech onchecked={onChecked} Parts_of_speech="Noun">
+      <div className="w-[327px] md:w-[689px] lg:w-[737px]  ">
+        <Parts_of_speech onchecked={onChecked} Parts_of_speech="noun">
           {nounMeaning
             .map((x, i) => (
               <ul className="mt-8 ml-4 space-y-4" key={i}>
@@ -32,11 +32,11 @@ const Result_v2 = ({
         </Parts_of_speech>
 
         <div className="flex gap-12 mt-14 ">
-          <h1 className="text-2xl text-[#757575] w-[96px] h-[26px] ">
+          <h1 className="text-xl md:text-2xl lg:text-3xl text-[#757575] w-[96px] h-[26px] md:mr-4 lg:mr-4 ">
             Synonyms
           </h1>
           <p
-            className={`text-2xl text-[#A445ED] font-bold hover:underline cursor-pointer  ${
+            className={`text-xl md:text-2xl lg:text-2xl text-[#A445ED] font-bold hover:underline cursor-pointer  ${
               distinctFonts === "font-sans"
                 ? "font-[Inter]"
                 : distinctFonts === "font-serif"
@@ -48,19 +48,22 @@ const Result_v2 = ({
           >
             {synonymsApi
               .map((x) => x)
-              .slice(0, 4)
+              .slice(0, 3)
               .toString("")}
           </p>
         </div>
       </div>
-      <Parts_of_speech Parts_of_speech="Verb" styl="mt-12">
+      <Parts_of_speech Parts_of_speech="verb" styl="mt-12">
         {verbMeaning
           .map((x, i) => (
             <ul key={i} className="mt-6 ml-4 space-y-4">
               <li className="list-none before:content-['•'] before:text-[#8F19E8] before:mr-3 ">
                 {x?.definition}
               </li>
-              <p className="ml-5 text-[#757575]"> {x?.example ? `"${x?.example}"` : ""}</p>
+              <p className="ml-5 text-[#757575]">
+                {" "}
+                {x?.example ? `"${x?.example}"` : ""}
+              </p>
             </ul>
           ))
           .slice(0, 3)}
@@ -74,33 +77,34 @@ const Result_v2 = ({
           </li>
         </ul> */}
       </Parts_of_speech>
-      <img src={rectangle3} alt="rectangle3" className="mt-8" />
-      <div className="flex gap-12 mt-4 ">
-        <h1 className="  text-[#757575] w-[48px] h-[18px] ">Source</h1>
+      {/* <img src={rectangle3} alt="rectangle3" className="mt-8" /> */}
+      <div>
+        <svg
+          className="w-[327px] md:w-[689px] lg:w-[736px] mt-8"
+          // width=""
+          height="2"
+          viewBox="0 0  16"
+          fill=""
+          xmlns="http://www.w3.org/2000/svg"
+        >
+          <rect  className="w-[327px] md:w-[689px] lg:w-[736px] mt-8" height="0.5" fill={"#979797"} />
+        </svg>
+      </div>
+      <div className=" md:flex lg:flex gap-12 mt-4 ">
+        <h1 className=" underline  text-xl text-[#757575] ">Source</h1>
         <div>
           <a
             href={`${sourceLink}`}
             className="flex items-center gap-4 "
             onClick={() => sourceLinkHandler(sourceLink)}
           >
-            <p className=" underline  text-[#A445ED] ">
+            <p className=" underline  text-[#2D2D2D] ">
               {sourceLink.slice(0, 1)}
             </p>
             <img src={searchlogo} alt="searchlogo" />
           </a>
 
-          {/* {sourceLink &&
-            sourceLink.map((url, i) => (
-              <a
-                href={`${sourceLink}`}
-                key={i}
-                className="flex items-center gap-4 "
-                onClick={() => sourceLinkHandler(url)}
-              >
-                <p className=" underline  text-[#A445ED] ">{sourceLink.slice(0,1)}</p>
-                <img src={searchlogo} alt="searchlogo" />
-              </a>
-            ))} */}
+     
         </div>
       </div>
     </>

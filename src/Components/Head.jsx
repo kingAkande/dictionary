@@ -130,8 +130,7 @@ const Head = ({ onChecked, onsetFont, onfonts, onSetChecked }) => {
   };
 
   return (
-    // should be
-    <div className="w-[736.99px] sm:w-[327px] h-[36.5px] flex justify-between  items-center ">
+    <div className=" w-[327px] md:w-[689px] lg:w-[737px] h-[36.5px] flex justify-between  items-center mx-auto ">
       <div>
         <img className="h-[36px]" src={book} alt="book logo" />
       </div>

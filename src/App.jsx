@@ -289,7 +289,7 @@ function Loading() {
 
 function ErrorMessage({checked}) {
   return (
-    <div className="flex  flex-col gap-6 items-center w-[736px] mt-24">
+    <div className="w-[327px] md:w-[689px] lg:w-[737px] flex  flex-col gap-6 items-center  mt-24">
       <img className="mb-4" src={emoji} alt="emoji" />
       <h1 className="font-bold">No definitions found</h1>
       <p className={`${checked && "text-[#757575]"} ${"text-center" }`  }>

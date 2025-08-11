@@ -19,7 +19,7 @@ const Word_Result = ({
   emptyFieldError,
 }) => {
   return (
-    <div className="w-[737px]   mt-8">
+    <div className="w-[327px] md:w-[689px] lg:w-[737px]   mt-8">
       {loading ? (
         loadcomponent
       ) : (
