@@ -68,16 +68,8 @@ const Result_v2 = ({
           ))
           .slice(0, 3)}
 
-        {/* <ul className="mt-6 ml-4 space-y-4">
-          <li className="list-none before:content-['•'] before:text-[#8F19E8] before:mr-3 ">
-            Lorem ipsum dolor sit amet consectetur adipisicing elit. Assumenda
-            tempora perspiciatis illum autem consequatur laudantium unde ducimus
-            minus debitis, placeat quod quibusdam nobis iste quia doloremque,
-            amet vitae. Accusantium, facilis?
-          </li>
-        </ul> */}
       </Parts_of_speech>
-      {/* <img src={rectangle3} alt="rectangle3" className="mt-8" /> */}
+
       <div>
         <svg
           className="w-[327px] md:w-[689px] lg:w-[736px] mt-8"
@@ -98,7 +90,7 @@ const Result_v2 = ({
             className="flex items-center gap-4 "
             onClick={() => sourceLinkHandler(sourceLink)}
           >
-            <p className=" underline  text-[#2D2D2D] ">
+            <p className=" underline text-sm  md:text-lg lg:text-lg   text-[#2D2D2D] ">
               {sourceLink.slice(0, 1)}
             </p>
             <img src={searchlogo} alt="searchlogo" />
