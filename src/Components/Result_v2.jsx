@@ -1,8 +1,6 @@
 import React from "react";
 import Parts_of_speech from "./Parts_of_speech";
-// import rectangle3 from "../assets/Rectangle3.png";
 import searchlogo from "../assets/search_logo.png";
-// import rectangleimage2 from "../assets/Rectangle2.png";
 
 const Result_v2 = ({
   nounMeaning,
@@ -67,7 +65,6 @@ const Result_v2 = ({
             </ul>
           ))
           .slice(0, 3)}
-
       </Parts_of_speech>
 
       <div>
@@ -79,7 +76,11 @@ const Result_v2 = ({
           fill=""
           xmlns="http://www.w3.org/2000/svg"
         >
-          <rect  className="w-[327px] md:w-[689px] lg:w-[736px] mt-8" height="0.5" fill={"#979797"} />
+          <rect
+            className="w-[327px] md:w-[689px] lg:w-[736px] mt-8"
+            height="0.5"
+            fill={"#979797"}
+          />
         </svg>
       </div>
       <div className=" md:flex lg:flex gap-12 mt-4 ">
@@ -95,8 +96,6 @@ const Result_v2 = ({
             </p>
             <img src={searchlogo} alt="searchlogo" />
           </a>
-
-     
         </div>
       </div>
     </>
