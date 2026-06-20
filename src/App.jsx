@@ -74,7 +74,7 @@ function App() {
             `https://api.dictionaryapi.dev/api/v2/entries/en/${debouncedQuery}`,
             { signal: controller.signal }
           );
-
+          
           if (!res.ok) {
             if (res.status === 404) {
               console.log("Word not found");
